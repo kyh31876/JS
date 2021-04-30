@@ -31,7 +31,25 @@ let tensquared = (function (x) { return x * x; }(10));
 
 
 const sum = (x, y) => { return x + y; };
+sum;
 
 
 const f = x => { return { value: x }; };
 f()
+
+
+const sum = (x, y) => { return x + y; };
+console.log(sum)
+
+const polynomial = x => x*x + 2*x + 3;
+
+
+let filtered = [1,null,2,3].filter(x => x !== null); // filtered == [1,2,3]
+
+let squares = [1,2,3,4].map(x => x*x); //squares == [1,4,9,16]
+squares
+
+const x=10;
+const y=20;
+
+console.log(x+y);
