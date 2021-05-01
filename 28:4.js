@@ -1,4 +1,4 @@
-function printprops(o) {
+``function printprops(o) {
     for (let p in o) {
         console.log(`${p}: ${o[p]}\n`);
     }
@@ -52,4 +52,4 @@ squares
 const x=10;
 const y=20;
 
-console.log(x+y);
+console.log(x+y);``
