@@ -1,26 +1,13 @@
-function range(from, to) {
-methods (behavior)
-let r = Object.create(range.methods);
-this object.
-r.from = from;
-r.to = to;
-return r;
-}
+const sum = (x, y) => { return x + y; };
 
-range.methods = {
-includes(x) { return this.from <= x && x <= this.to; },
-*[Symbol.iterator]() {
-for(let x = Math.ceil(this.from); x <= this.to; x++)
-yield x;
-},
+const f = x => { return { value: x }; }; // Good: f()returns an object
+const g = x => ({ value: x }); // Good: g()returns an object
+const h = x => { value: x }; // Bad: h() returnsnothing
+const i = x => { v: x, w: x }; // Bad: SyntaxError
 
-toString() { return "(" + this.from + "..." + this.to +
-")"; }
-};
+function hypotenuse(a, b) {
+    function square(x) { return x*x; }
+    return Math.sqrt(square(a) + square(b));
+    }
 
-let r = range(1,3); // Create a range object
-r.includes(2) // => true: 2 is in the range
-r.toString() // => "(1...3)"
-[...r] // => [1, 2, 3]; convert to an array
-
-const sum = (x, y) => { return x + y; }; Zas
+    
