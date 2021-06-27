@@ -74,7 +74,7 @@ String.raw`\n`.length // => 2: a backslash character and the letter n
 
 //pattern matching 
 
-/^HTML/; // Match the letters H T M L at the start of a string
+/HTML/ // Match the letters H T M L at the start of a string
 /[1-9][0-9]*/; // Match a nonzero digit, followed by any # of digits`
 /\bjavascript\b/i; // Match "javascript" as a word, caseinsensitive
 
@@ -96,6 +96,7 @@ if (a === 4) {
     a = a + 1;
     }
 
+
 undefined
 null
 0 -
@@ -104,7 +105,7 @@ NaN
 ""
 //The following values convert to, and therefore work like, false:
 
-if (o !== null) ...
+if (o !== null) 
 
 
 if ((x === 0 && y === 0) || !(z === 0)) {
@@ -128,7 +129,7 @@ o[symname] // => 2: access the symbolnamed property
 
 let s = "hello"; // Start with some lowercase text
 s.toUpperCase(); // Returns "HELLO", but doesn't alter s
-s //undefined, null, booleans, numbers, and strings aren`t changed 
+console.log(s) //undefined, null, booleans, numbers, and strings aren`t changed 
 
 
 //Mutable Object References
@@ -162,6 +163,7 @@ for(let i = 0; i < a.length; i++) { // For each index of a[]
 }
 let c = Array.from(b); // In ES6, copy arrays with Array.from()
 
+//This code defines a function to compare two arrays:
 
 function equalArrays(a, b) {
     if (a === b) return true; // Identical arrays are equal
@@ -171,3 +173,165 @@ function equalArrays(a, b) {
     }
     return true; // Otherwise they are equal
     }
+
+
+//Type Conversions
+
+10+ "Hello"
+
+let n = 1 - "x"; // n == NaN; string "x" can't convert to a number
+
+//Conversions and Equality
+
+null == undefined // => true: These two values are treated as equal.
+"0" == 0 // => true: String converts to a number before comparing.
+0 == false // => true: Boolean converts to number before comparing.
+"0" == false // => true: Both operands convert to 0 before comparing!
+
+//Explicit Conversions
+Number("3") // => 3
+String(false) // => "false": Or use false.toString()
+Boolean([]) // => true
+
+x+""// converts the other one to a string.
+
+!!x //! operator converts its operand to a boolean and negates
+
+let n = 17;
+let binary = "0b" + n.toString(2); // binary == "0b10001"
+let octal = "0o" + n.toString(8); // octal == "0o21"
+let hex = "0x" + n.toString(16); // hex == "0x11"
+
+
+let n = 123456.789;
+n.toFixed(0) // => "123457" converts a number to a string with a specified number of digits
+n.toFixed(2) // => "123456.79"
+n.toFixed(5) // => "123456.78900"
+n.toExponential(1) // => "1.2e+5" converts a number to a string using exponential notation
+n.toExponential(3) // => "1.235e+5"
+n.toPrecision(4) // => "1.235e+5" converts a number to a string with the number of significant digits
+n.toPrecision(7) // => "123456.8"
+n.toPrecision(10) // => "123456.7890"
+
+//TOSTRING() AND VALUEOF() METHODS
+
+({x: 1, y: 2}).toString() // => default toString() method does not return a very interesting value
+
+[1,2,3].toString() // => "1,2,3"
+(function(x) { f(x); }).toString() // => "function(x) {f(x); }"
+/\d+/g.toString() // => "/\\d+/g"
+let d = new Date(2020,0,1);
+d.toString() // => "Wed Jan 01 2020 00:00:00 GMT-0800(Pacific Standard Time)"
+
+let x=1;
+x.valueOf()
+
+
+//Variable Declaration and Assignment
+
+//“variable” implies that new values can be assigned
+
+//Declarations with let and const
+let i, sum; //You can also declare multiple variables in a single let statement
+
+
+let message = "hello";
+let i = 0, j = 0, k = 0;
+let x = 2, y = x*x; // Initializers can use previously declared variables
+
+
+//constants cannot have their values changed,
+const H0 = 74; // Hubble constant (km/s/Mpc)
+const C = 299792.458; // Speed of light in a vacuum (km/s)
+const AU = 1.496E8;
+
+
+for(let i = 0, len = data.length; i < len; i++)console.log(data[i]);
+for(let datum of data) console.log(datum);
+for(let property in object) console.log(property);
+
+for(const datum of data) console.log(datum);
+for(const property in object) console.log(property); //const declaration
+//is just saying that the value is constant for the duration of one loop iteration:
+
+
+//REPEATED DECLARATIONS
+const x = 1; // Declare x as a global constant
+if (x === 1) {
+let x = 2; // Inside a block x can refer to a different value
+console.log(x); // Prints 2
+}
+console.log(x); // Prints 1: we're back in the global scope now
+let x = 3; // ERROR! Syntax error trying to redeclare x
+
+
+//Variable Declarations with var
+var x;
+var data = [], count = data.length;
+for(var i = 0; i < count; i++) console.log(data[i]);
+
+
+
+
+//Destructuring Assignment
+
+//the value on the righthand side is an array or object (a “structured” value)
+//lefthand side specifies one or more variable names using a syntax that mimics array and
+//object literal syntax.
+let [x,y] = [1,2]; // Same as let x=1, y=2
+[x,y] = [x+1,y+1]; // Same as x = x + 1, y = y + 1
+[x,y] = [y,x]; // Swap the value of the two variables
+[x,y] // => [3,2]: the incremented and swapped values
+
+
+// Convert [x,y] coordinates to [r,theta] polar coordinates
+function toPolar(x, y) {
+    return [Math.sqrt(x*x+y*y), Math.atan2(y,x)];
+    }
+// Convert polar to Cartesian coordinates
+function toCartesian(r, theta) {
+return [r*Math.cos(theta), r*Math.sin(theta)];
+}
+let [r,theta] = toPolar(1.0, 1.0); // r == Math.sqrt(2);
+theta == Math.PI/4
+let [x,y] = toCartesian(r,theta); // [x, y] == [1.0, 1,0]
+
+//a code that loops over the name/value pairs of all properties of an object
+//uses destructuring assignment to convert those pairs from two-element arrays into individual variables:
+
+let o = { x: 1, y: 2 }; // The object we'll loop over
+for(const [name, value] of Object.entries(o)) {
+console.log(name, value); // Prints "x 1" and "y 2"
+}
+
+
+let [x,y] = [1]; // x == 1; y == undefined
+[x,y] = [1,2,3]; // x == 1; y == 2
+[,x,,y] = [1,2,3,4]; // x == 2; y == 4
+
+let [a, [b, c]] = [1, [2,2.5], 3]; // a == 1; b == 2; c ==2.5
+
+let [first, ...rest] = "Hello"; // first == "H"; rest ==["e","l","l","o"]
+
+let transparent = {r: 0.0, g: 0.0, b: 0.0, a: 1.0}; // A RGBA color
+let {r, g, b} = transparent; // r == 0.0; g == 0.0; b == 0.0
+
+// Same as const sin=Math.sin, cos=Math.cos, tan=Math.tan
+const {sin, cos, tan} = Math; //If the lefthand side of this assignment had included a variable whose name was not a property of
+//Math, that variable would simply be assigned undefined.
+
+
+
+//you may be better off just writing out your assignments 
+//explicitly with traditional code like let x1 = points.p1[0];.
+let points = { p1: [1,2], p2: [3,4] }; // An object with 2 array props
+let { p1: [x1, y1], p2: [x2, y2] } = points; //destructured into 4 vars
+(x1 === 1 && y1 === 2 && x2 === 3 && y2 === 4) // => true
+
+
+// Start with a data structure and a complex destructuring
+let points = [{x: 1, y: 2}, {x: 3, y: 4}];
+let [{x: x1, y: y1}, {x: x2, y: y2}] = points;
+// Check your destructuring syntax by flipping the assignment around
+let points2 = [{x: x1, y: y1}, {x: x2, y: y2}]; // points2 == points
+
